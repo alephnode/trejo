@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 import { User, UserDocument } from '../users/User'
 
-interface RequestToken extends Request {
+export interface RequestToken extends Request {
   token: string
   user: UserDocument
 }

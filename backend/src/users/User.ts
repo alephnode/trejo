@@ -13,7 +13,7 @@ export interface UserDocument extends mongoose.Document {
   name: string
   email: string
   password: string
-  tokens: object[]
+  tokens?: object[]
 }
 
 /**
@@ -82,12 +82,11 @@ userSchema.methods.toJSON = function(): UserDocument {
 /**
  * method to generate auth token
  */
-userSchema.methods.generateAuthToken = async function(): Promise<string> {
-  const user: UserDocument = this
-  const token: string = jwt.sign(
-    { _id: user._id.toString() },
-    process.env.JWT_SECRET
-  )
+userSchema.methods.generateAuthToken = async (
+  user: UserDocument
+): Promise<string> => {
+  const userObject: UserDocument = user.toObject()
+  const token: string = jwt.sign({ _id: userObject.id }, process.env.JWT_SECRET)
 
   user.tokens = user.tokens.concat({ token })
   await user.save()
@@ -119,9 +118,8 @@ userSchema.statics.findByCredentials = async (
 userSchema.pre('save', async function(next: NextFunction) {
   const user = <UserDocument>this
 
-  if (user.isModified('password')) {
+  if (user.isModified('password'))
     user.password = await bcrypt.hash(user.password, 8)
-  }
 
   next()
 })

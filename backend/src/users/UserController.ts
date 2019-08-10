@@ -1,5 +1,10 @@
 import { Request, Response } from 'express'
 import { User, UserDocument } from './User'
+import { RequestToken } from '../middleware/auth'
+
+interface UserToken {
+  token: string
+}
 
 /**
  * Retrieve a list of Users
@@ -8,11 +13,54 @@ export const getUsers = (_1: Request, res: Response) =>
   User.find((err: Error, doc: UserDocument[]) => res.send(doc))
 
 /**
+ * Retrieve User details
+ */
+export const getUserDetails = async (req: RequestToken, res: Response) =>
+  res.send(req.user)
+
+/**
  * Add a User
  */
-export const addUser = (req: Request, res: Response) => {
-  const newUser: UserDocument = new User(req.body)
-  return newUser.save((err: Error, doc: UserDocument) => res.send(doc))
+export const addUser = async (req: Request, res: Response) => {
+  const user: UserDocument = new User(req.body)
+  try {
+    await user.save()
+    res.status(201).send({ user })
+  } catch (e) {
+    res.status(400).send(e)
+  }
+}
+
+/**
+ * Log in User
+ */
+export const loginUser = async (req: Request, res: Response) => {
+  try {
+    const user: UserDocument = await User.schema.statics.findByCredentials(
+      req.body.email,
+      req.body.password
+    )
+    const token = await user.schema.methods.generateAuthToken(user)
+    res.status(200).send({ user, token })
+  } catch (e) {
+    res.status(400).send({ message: e.message })
+  }
+}
+
+/**
+ * Log out User
+ */
+export const logoutUser = async (req: RequestToken, res: Response) => {
+  try {
+    req.user.tokens = req.user.tokens.filter((token: UserToken) => {
+      return token.token !== req.token
+    })
+    await req.user.save()
+
+    res.send()
+  } catch (e) {
+    res.status(500).send()
+  }
 }
 
 /**
