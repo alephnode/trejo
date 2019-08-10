@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { User, UserDocument } from './User'
 
 /**
- * Retrieve a list of User
+ * Retrieve a list of Users
  */
 export const getUsers = (_1: Request, res: Response) =>
   User.find((err: Error, doc: UserDocument[]) => res.send(doc))

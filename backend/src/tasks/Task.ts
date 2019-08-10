@@ -8,8 +8,8 @@ export interface TaskDocument extends mongoose.Document {
   description: string
   ticket?: string
   completed: boolean
-  author: UserDocument
-  assignee: UserDocument
+  author: UserDocument['_id']
+  assignee: UserDocument['_id']
 }
 
 /**
