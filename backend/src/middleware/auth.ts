@@ -7,6 +7,9 @@ export interface RequestToken extends Request {
   user: UserDocument
 }
 
+/**
+ * Middleware to verify headers for auth-protected endpoint
+ */
 const auth = async (req: RequestToken, res: Response, next: NextFunction) => {
   try {
     const token = req.header('Authorization').replace('Bearer ', '')
