@@ -5,7 +5,7 @@ import lusca from 'lusca';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import {MONGODB_URI} from './utils/secrets';
-import * as taskController from './controllers/tasks';
+import * as taskController from './tasks/TaskController';
 
 const mongoUrl = MONGODB_URI;
 mongoose.connect(mongoUrl, {useNewUrlParser: true});

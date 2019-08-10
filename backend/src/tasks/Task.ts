@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {UserDocument} from './User';
+import {UserDocument} from '../users/User';
 
 /**
  *  Interface for task document used in project
