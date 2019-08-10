@@ -1,9 +1,15 @@
 import mongoose from 'mongoose';
 
-export type UserDocument = mongoose.Document & {
+/**
+ * Interface for User
+ */
+export interface UserDocument extends mongoose.Document {
   name: string;
-};
+}
 
+/**
+ * Schema for User
+ */
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
