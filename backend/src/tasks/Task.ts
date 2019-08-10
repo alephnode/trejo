@@ -1,15 +1,15 @@
-import mongoose from 'mongoose';
-import {UserDocument} from '../users/User';
+import mongoose from 'mongoose'
+import { UserDocument } from '../users/User'
 
 /**
  *  Interface for task document used in project
  */
 export interface TaskDocument extends mongoose.Document {
-  description: string;
-  ticket: string;
-  completed: boolean;
-  author: UserDocument;
-  assignee: UserDocument;
+  description: string
+  ticket?: string
+  completed: boolean
+  author: UserDocument
+  assignee: UserDocument
 }
 
 /**
@@ -44,6 +44,6 @@ const taskSchema = new mongoose.Schema(
   {
     timestamps: true
   }
-);
+)
 
-export const Task = mongoose.model<TaskDocument>('Task', taskSchema);
+export const Task = mongoose.model<TaskDocument>('Task', taskSchema)

@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 /**
  * Interface for User
  */
 export interface UserDocument extends mongoose.Document {
-  name: string;
+  name: string
 }
 
 /**
@@ -16,6 +16,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true
   }
-});
+})
 
-export const User = mongoose.model<UserDocument>('Task', userSchema);
+export const User = mongoose.model<UserDocument>('User', userSchema)
