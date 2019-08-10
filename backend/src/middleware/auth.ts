@@ -28,4 +28,4 @@ const auth = async (req: RequestToken, res: Response, next: NextFunction) => {
   }
 }
 
-module.exports = auth
+export default auth
