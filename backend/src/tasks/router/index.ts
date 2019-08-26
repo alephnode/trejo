@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import TaskController from './TaskController'
+import TaskController from '../controllers'
 
 /**
  * Register routes for Task
