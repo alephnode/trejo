@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as TaskController from './TaskController'
+import TaskController from './TaskController'
 
 /**
  * Register routes for Task
@@ -8,22 +8,22 @@ export const register = (router: Router): Router => {
   /**
    * Get all tasks
    */
-  router.get('/tasks', TaskController.getTasks)
+  router.get('/tasks', TaskController.get)
 
   /**
    * Add a new task
    */
-  router.post('/tasks', TaskController.addTask)
+  router.post('/tasks', TaskController.post)
 
   /**
    * Update an existing task
    */
-  router.put('/tasks/:id', TaskController.updateTask)
+  router.put('/tasks/:id', TaskController.put)
 
   /**
    * Delete a task
    */
-  router.delete('/tasks/:id', TaskController.deleteTask)
+  router.delete('/tasks/:id', TaskController.delete)
 
   return router
 }
