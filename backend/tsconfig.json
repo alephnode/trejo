@@ -12,5 +12,5 @@
       "*": ["node_modules/*", "src/*"]
     }
   },
-  "include": ["src/*", "src/**/*"]
+  "include": ["src/*", "src/**/*", "tests/*", "tests/**/*"]
 }
