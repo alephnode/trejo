@@ -6,11 +6,10 @@ import { Task } from '../Task'
  */
 export const deleteTask = (req: Request, res: Response) => {
   try {
-    const result = Task.findByIdAndRemove(<String>req.params.id, (err: Error) =>
+    Task.findByIdAndRemove(<String>req.params.id, (err: Error) =>
       res.send(err ? err : {})
     )
-    return result
   } catch (e) {
-    return res.status(500).send({ err: e })
+    res.status(500).send({ err: e })
   }
 }

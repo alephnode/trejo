@@ -6,8 +6,7 @@ import { Task, TaskDocument } from '../Task'
  */
 export const getTasks = (_1: Request, res: Response) => {
   try {
-    const result = Task.find((err: Error, doc: TaskDocument[]) => res.send(doc))
-    return result
+    Task.find((err: Error, doc: TaskDocument[]) => res.send(doc))
   } catch (e) {
     res.status(500).send({ err: e })
   }

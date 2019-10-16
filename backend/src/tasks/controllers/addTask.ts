@@ -4,14 +4,11 @@ import { Task, TaskDocument } from '../Task'
 /**
  * Add a task
  */
-export const addTask = (req: Request, res: Response) => {
+export const addTask = (req: Request, res: Response): void => {
   try {
     const newTask: TaskDocument = new Task(req.body)
-    const result = newTask.save((err: Error, doc: TaskDocument) =>
-      res.send(doc)
-    )
-    return result
+    newTask.save((err: Error, doc: TaskDocument) => res.send(doc))
   } catch (e) {
-    return res.status(500).send({ err: e })
+    res.status(500).send({ err: e })
   }
 }
